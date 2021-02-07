@@ -34,6 +34,7 @@
                 <select id="role_id" class="block mt-1 w-full" name="role_id">
                     <option selected="true" disabled>Select</option>
                     <option value="user">User</option>
+                    @yield('optionReg')
                 </select>
             </div>
 
