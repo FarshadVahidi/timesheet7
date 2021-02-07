@@ -1,4 +1,5 @@
 @extends('dashboard')
+@include('nav')
 @section('dash')
     {{ __('User Dashbord') }}
 @endsection
