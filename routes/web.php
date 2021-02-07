@@ -17,6 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+//Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//    return view('dashboard');
+//})->name('dashboard');
+
+//auth route for all type of user
+Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
+    Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index') ->name('dashboard');
+});
