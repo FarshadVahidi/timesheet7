@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class RegController extends Controller
 {
@@ -13,7 +16,20 @@ class RegController extends Controller
      */
     public function index()
     {
-        return view ('super.index');
+
+        if(Auth::user()->hasRole('user'))
+        {
+            return view('user.userdashboard');
+        }elseif (Auth::user()->hasRole('administrator'))
+        {
+            return view('admin.admindashboard');
+        }elseif (Auth::user()->hasRole('superadministrator'))
+        {
+            return view('super.index');
+        }else{
+            return view('dashboard');
+        }
+
     }
 
     /**
@@ -30,11 +46,27 @@ class RegController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return User
      */
     public function store(Request $request)
     {
-        //
+
+        $data = $request->validate([
+            'name'=>'required|string|max:255',
+            'email'=>'required|string|email|unique:users',
+            'password'=> 'required|min:8',
+            'role_id'=> 'required|string',
+        ]);
+
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
+        $user->attachRole($request->role_id);
+
+        return view ('super.superdashboard');
+
     }
 
     /**
