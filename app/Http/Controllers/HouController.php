@@ -38,22 +38,27 @@ class HouController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        return view ('super.addNewHour');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $hour = new Hour();
+        $hour->user_id = $request->user()->id;
+        $hour->date = $request->Date;
+        $hour->hour = $request->Hour;
+        $hour->save();
+        return view ('super.addNewHour');
     }
 
     /**
