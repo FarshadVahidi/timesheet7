@@ -30,6 +30,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::get('/allHour', 'App\Http\Controllers\HouController@index')->name('hou');
     Route::get('/addNewPerson', 'App\Http\Controllers\RegController@index')->name('reg');
     Route::post('/addNewPerson', 'App\Http\Controllers\RegController@store');
+    Route::get('/hours-detail/{id}', '\App\Http\Controllers\HouController@show')->name('det');
 
 
 });

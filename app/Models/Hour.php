@@ -9,6 +9,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Hour extends Model
 {
     use HasFactory;
+    private $user_id;
+    private $date;
+    private $hour;
+    protected $table = "hours";
     protected $guarded=[];
 
     public function user(): BelongsTo

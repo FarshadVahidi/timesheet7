@@ -60,11 +60,13 @@ class HouController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+//        $data = Hour::all()->where('user_id', '=', $id);
+        $data = DB::table('hours')->select('user_id', 'date', 'hour', 'created_at', 'updated_at')->where('user_id', '=', $id)->orderByRaw('date DESC')->get();
+        return view ('super.hourdetail', compact('data'));
     }
 
     /**
