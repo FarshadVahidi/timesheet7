@@ -5,8 +5,29 @@
 
 @section('content')
 
-    @foreach($dataall as $d)
-        <p> this is user  {{ $d->id }}  {{ $d->name }}    {{$d->sum}}</p>
-    @endforeach
+    <div class="container">
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Hours</th>
+                    <th scope="col" >Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($dataall as $data)
+                    <tr>
+                        <td>{{$data->id}}</td>
+                        <td>{{$data->name}}</td>
+                        <td>{{$data->sum}}</td>
+                        <td><a href="/hours-update/{{$data->id}}" class="btn btn-success">detail</a></td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+    </div>
 
 @endsection
