@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Hour;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HouController extends Controller
 {
@@ -22,7 +25,11 @@ class HouController extends Controller
             return view('admin.admindashboard');
         }elseif (Auth::user()->hasRole('superadministrator'))
         {
-            return view('super.superdashboard');
+
+            $dataall = DB::table('users')->join('hours', 'users.id' , '=', 'hours.user_id')->select('users.id', 'users.name', DB::raw('sum(hour) as sum'))
+            ->groupBy('users.id')->get();
+
+            return view('super.allhoure', compact('dataall'));
         }else{
             return view('dashboard');
         }
