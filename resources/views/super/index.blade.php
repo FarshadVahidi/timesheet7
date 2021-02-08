@@ -43,7 +43,7 @@
 
 <div class="container">
 
-        <form action="/dashboard/addNewPerson" method="POST" class="pb-5">
+        <form action="/addNewPerson" method="POST" class="pb-5">
 
             <div class="py-3">
                 <legend>You can add new person</legend>

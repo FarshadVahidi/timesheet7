@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
-class RegController extends Controller
+class HouController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function index()
     {
-
         if(Auth::user()->hasRole('user'))
         {
             return view('user.userdashboard');
@@ -25,11 +22,10 @@ class RegController extends Controller
             return view('admin.admindashboard');
         }elseif (Auth::user()->hasRole('superadministrator'))
         {
-            return view('super.index');
+            return view('super.superdashboard');
         }else{
             return view('dashboard');
         }
-
     }
 
     /**
@@ -46,27 +42,11 @@ class RegController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return User|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-
-        $data = $request->validate([
-            'name'=>'required|string|max:255',
-            'email'=>'required|string|email|unique:users',
-            'password'=> 'required|min:8',
-            'role_id'=> 'required|string',
-        ]);
-
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->save();
-        $user->attachRole($request->role_id);
-
-        return view ('super.superdashboard');
-
+        //
     }
 
     /**

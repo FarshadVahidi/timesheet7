@@ -27,9 +27,10 @@ Route::view('contact', 'contact');
 //auth route for all type of user
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index') ->name('dashboard');
-//    Route::get('/dashboard/addNewPerson', 'App\Http\Controllers\RegController@index')->name('reg');
-    Route::get('/dashboard/addNewPerson', 'App\Http\Controllers\RegController@index')->name('reg');
-    Route::post('/dashboard/addNewPerson', 'App\Http\Controllers\RegController@store');
+    Route::get('/allHour', 'App\Http\Controllers\HouController@index')->name('hou');
+    Route::get('/addNewPerson', 'App\Http\Controllers\RegController@index')->name('reg');
+    Route::post('/addNewPerson', 'App\Http\Controllers\RegController@store');
+
 
 });
 
