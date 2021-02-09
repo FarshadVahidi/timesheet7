@@ -43,44 +43,62 @@
 
 <div class="container">
 
-        <form action="/addNewPerson" method="POST" class="pb-5">
+        <div class="card-body">
 
-            <div class="py-3">
-                <legend>You can add new person</legend>
-            </div>
+            @if(Session::has('user_added'))
+                <div class="alert alert-success" role="alert">
+                    {{Session::get('user_added')}}
+                </div>
+            @endif
 
-            <div class="mb-3">
-                <label class="form-label">Name</label>
-                <input type="text" class="form-text" name="name">
-                {{ $errors->first('name') }}
-            </div>
+            @if(Session::has('user_ex'))
+                <div class="alert alert-danger" role="alert">
+                    {{Session::get('user_ex')}}
+                </div>
+            @endif
 
-            <div class="mb-3">
-                <label class="form-label">Email address</label>
-                <input type="email" class="form-text" name="email">
-                {{ $errors->first('email') }}
-            </div>
+            <form action="/addNewPerson" method="POST" class="pb-5">
 
-            <div class="mb-3">
-                <label class="form-label">Password</label>
-                <input type="password" name="password" class="form-text">
-                {{ $errors->first('password') }}
-            </div>
+                <div class="py-3">
+                    <legend>You can add new person</legend>
+                </div>
 
-            <div class="mb-3">
-                <select class="form-select" name="role_id">
-                    <option class="disabled">Open this select menu</option>
-                    <option value="user">User</option>
-                    <option value="administrator">Administrator</option>
-                    <option value="superadministrator">Super Administrator</option>
-                </select>
-                {{ $errors->first('role_id') }}
-            </div>
+                <div class="mb-3">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-text" name="name">
+                    {{ $errors->first('name') }}
+                </div>
 
-            @csrf
+                <div class="mb-3">
+                    <label class="form-label">Email address</label>
+                    <input type="email" class="form-text" name="email">
+                    {{ $errors->first('email') }}
+                </div>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" name="password" class="form-text">
+                    {{ $errors->first('password') }}
+                </div>
+
+                <div class="mb-3">
+                    <select class="form-select" name="role_id">
+                        <option class="disabled">Open this select menu</option>
+                        <option value="user">User</option>
+                        <option value="administrator">Administrator</option>
+                        <option value="superadministrator">Super Administrator</option>
+                    </select>
+                    {{ $errors->first('role_id') }}
+                </div>
+
+                @csrf
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+
+        </div>
+
 
     </div>
 

@@ -46,7 +46,7 @@ class RegController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return User|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -58,14 +58,20 @@ class RegController extends Controller
             'role_id'=> 'required|string',
         ]);
 
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->save();
-        $user->attachRole($request->role_id);
+//        try{
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->save();
+            $user->attachRole($request->role_id);
 
-        return view ('super.superdashboard');
+            return back()->with('user_added', 'User added successfully.');
+//        }catch(\Exception $exception){
+//            dd($exception->getMessage());
+//            return back()->with('user_ex', 'The entered Date exist');
+//        }
+
 
     }
 
