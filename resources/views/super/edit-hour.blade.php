@@ -6,14 +6,17 @@
 @section('content')
     <section style="padding-top:60px">
         <div class="container">
-
             <div class="card-head">
-                        @if(Session::has('hour_update'))
-                            <div class="alert alert-success" role="alert">
-                                {{Session::get('hour_update')}}
-                            </div>
-                        @endif
+                <div class="card-head">
+                    @if(Session::has('hour_update'))
+                        <div class="alert alert-success" role="alert">
+                            {{Session::get('hour_update')}}
+                        </div>
+                    @endif
+                </div>
             </div>
+
+
 
             <div class="card-body">
 
