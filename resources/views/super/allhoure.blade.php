@@ -22,7 +22,7 @@
                             <td>{{$data->id}}</td>
                             <td>{{$data->name}}</td>
                             <td>{{$data->sum}}</td>
-                            <td><a href="/hours-detail/{{$data->id}}" class="btn btn-success">Detail</a></td>
+                            <td><a href="/hours-detail/{{$data->id}}" class="btn btn-info">Detail</a></td>
                         </tr>
                     @endforeach
                 </tbody>
