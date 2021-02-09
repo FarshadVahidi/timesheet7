@@ -9,6 +9,18 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
+                    @if(Session::has('date_added'))
+                        <div class="alert alert-success" role="alert">
+                            {{Session::get('date_added')}}
+                        </div>
+                    @endif
+
+                    @if(Session::has('date_duplicate'))
+                        <div class="alert alert-danger" role="alert">
+                            {{Session::get('date_duplicate')}}
+                        </div>
+                    @endif
+
                     <form method="post" action="/daycreate">
                         {{csrf_field()}}
                         <div class="mb-3">

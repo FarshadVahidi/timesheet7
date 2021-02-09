@@ -7,6 +7,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
+use PHPUnit\Util\Exception;
+use App\Exceptions\DuplicateException;
 
 class HouController extends Controller
 {
@@ -49,16 +52,21 @@ class HouController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        $hour = new Hour();
-        $hour->user_id = $request->user()->id;
-        $hour->date = $request->Date;
-        $hour->hour = $request->Hour;
-        $hour->save();
-        return view ('super.addNewHour');
+        try{
+            $hour = new Hour();
+            $hour->user_id = $request->user()->id;
+            $hour->date = $request->Date;
+            $hour->hour = $request->Hour;
+            $hour->save();
+            return back()->with('date_added', 'Date and Hour has been Added successfully.');
+        }catch(QueryException $exception){
+            return back()->with('date_duplicate', 'The entered Date exist');
+        }
+
     }
 
     /**
